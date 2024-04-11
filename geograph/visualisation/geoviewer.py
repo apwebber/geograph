@@ -225,7 +225,7 @@ class GeoGraphViewer(ipyleaflet.Map):
                 current_graph, crs=self.gpd_crs_code
             )
             graph_geo_data = ipyleaflet.GeoData(
-                geo_dataframe=edges.append(nodes)
+                geo_dataframe=pd.concat([edges, nodes])
                 .to_frame(name="geometry")
                 .reset_index(),
                 name=current_name + "_graph",
