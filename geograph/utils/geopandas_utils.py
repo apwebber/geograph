@@ -9,6 +9,7 @@ from geograph.utils.polygon_utils import (
     connect_with_interior_or_edge_or_corner_bulk,
 )
 from shapely.geometry import MultiPolygon
+import pandas as pd
 
 
 # For switching identifiction mode in `identify_node`
@@ -131,4 +132,5 @@ def merge_diagonally_connected_polygons(df: gpd.GeoDataFrame) -> gpd.GeoDataFram
         new_nodes["class_label"].append(df["class_label"].loc[nodes[0]])
         new_nodes["geometry"].append(MultiPolygon(df["geometry"].loc[nodes].values))
 
-    return new_df.append(gpd.GeoDataFrame(new_nodes), ignore_index=True)
+    #return new_df.append(gpd.GeoDataFrame(new_nodes), ignore_index=True)
+    return pd.concat([new_df, gpd.GeoDataFrame(new_nodes)])
