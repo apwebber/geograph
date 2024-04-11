@@ -82,7 +82,7 @@ def ps_defaults(use_tex: bool = True) -> None:
         "image.cmap": "RdYlBu_r",
     }
     matplotlib.rcParams.update(p_general)
-    matplotlib.style.use("seaborn-colorblind")
+    matplotlib.style.use("seaborn-v0_8-colorblind")
 
     if use_tex and find_executable("latex"):
         p_setting = {
