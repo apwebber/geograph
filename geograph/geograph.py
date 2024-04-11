@@ -656,7 +656,7 @@ class GeoGraph:
             nbrs = set(self.rtree.intersection(buff_poly_bounds))
             barrier_nbrs = {idx_dict[nbr] for nbr in barrier_indices.intersection(nbrs)}
             barriers_exist = len(barrier_nbrs) > 0
-            barrier_poly = self.df["geometry"].loc[barrier_nbrs].unary_union
+            barrier_poly = self.df["geometry"].loc[list(barrier_nbrs)].unary_union
             # Necessary to correct for the rtree returning iloc indexes
             nbrs = {idx_dict[nbr] for nbr in nbrs}
             for nbr in nbrs:
@@ -789,7 +789,7 @@ class GeoGraph:
         """
         components: List[set] = list(nx.connected_components(self.graph))
         if calc_polygons:
-            geom = [self.df["geometry"].loc[comp].unary_union for comp in components]
+            geom = [self.df["geometry"].loc[list(comp)].unary_union for comp in components]
             gdf = gpd.GeoDataFrame(
                 {"geometry": geom, "class_label": -1}, crs=self.df.crs
             )
